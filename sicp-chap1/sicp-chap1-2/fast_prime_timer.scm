@@ -1,23 +1,7 @@
-(define (expmod base expn m)
-  (define (square a) (* a a))
-  (cond ((< m 1) #f)
-		((= expn 0) (remainder 1 m))
-		((even? expn) (remainder (square (expmod base (/ expn 2) m)) m))
-		(else
-		  (remainder (* base (expmod base (- expn 1) m)) m))))
+; Fermat primality test
+(include "fermat_test.scm")
 
-(define (fermat-test n)
-  (define rand (+ 1 (random (- n 1))))
-  (= (expmod rand n n) rand))
-
-(define (fast-prime? p times)
-  (cond ((< p 2) #f)
-		((= times 0) #t)
-		((fermat-test p) (fast-prime? p (- times 1)))
-		(else #f)))
-
-(define (prime? n) (fast-prime? n 10))
-
+; Timer for calculating a prime
 (define (prime-timer n)
   (define (report-prime elapsed-time)
 	(display " *** ")
@@ -29,6 +13,7 @@
   (display n)
   (start-prime-test n (current-inexact-milliseconds)))
 
+; Timer for searching first 3 primes bigger than n
 (define (search-primes n)
   (define (search-primes-count n count)
 	(if (even? n)
@@ -40,5 +25,4 @@
 		    (search-primes-count (+ n 2) (- count 1)))
 		  (search-primes-count (+ n 2) count))))))
   (search-primes-count n 3)
-  (newline)
-)
+  (newline))

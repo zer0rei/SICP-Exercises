@@ -1,3 +1,4 @@
+; Modifies expmod for the miller rabin primality test
 (define (expmod base expn m)
   (define (square a) (* a a))
   (define (sqrmod-with-check x)
@@ -14,12 +15,18 @@
 		(else
 		  (remainder (* base (expmod base (- expn 1) m)) m))))
 
+; Miller rabin test
 (define (miller-rabin? n)
   (define rand (+ 1 (random (- n 1))))
   (= (expmod rand (- n 1) n) 1))
 
-(define (prime? p times)
+; Primality test for a given number of times
+(define (miller-rabin-prime? p times)
   (cond ((< p 2) #f)
 		((= times 0) #t)
-		((miller-rabin? p) (prime? p (- times 1)))
+		((miller-rabin? p) (miller-rabin-prime? p (- times 1)))
 		(else #f)))
+
+; Primality test for 10 times
+(define (prime? p)
+  (miller-rabin-prime? p 10))

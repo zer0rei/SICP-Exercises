@@ -1,3 +1,4 @@
+; Iterative fibonacci procedure
 (define (fib n)
   (define (fib-iter a b p q count)
 	(cond ((< count 0) #f)
@@ -11,7 +12,5 @@
 						  (+ (* b p) (* a q))
 						  p
 						  q
-						  (- count 1))))
-  )
-  (fib-iter 1 0 0 1 n)
-)
+						  (- count 1)))))
+  (fib-iter 1 0 0 1 n))

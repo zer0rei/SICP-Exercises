@@ -1,3 +1,5 @@
+; Procedure for calculating the exponent base^expn modulo m
+; fast example
 (define (expmod base expn m)
   (define (square a) (* a a))
   (cond ((< m 1) #f)
@@ -6,6 +8,7 @@
 		(else
 		  (remainder (* base (expmod base (- expn 1) m)) m))))
 
+; slow example
 (define (expmod2 base expn m)
   (define (iexpt b n)
 	(define (square a) (* a a))

@@ -1,11 +1,7 @@
-(define (expmod base expn m)
-  (define (square a) (* a a))
-  (cond ((< m 1) #f)
-		((= expn 0) (remainder 1 m))
-		((even? expn) (remainder (square (expmod base (/ expn 2) m)) m))
-		(else
-		  (remainder (* base (expmod base (- expn 1) m)) m))))
+; Expmod
+(include "expmod.scm")
 
+; Fermat Carmichael test
 (define (fermat-test n)
   (define (fermat-test-iter n a)
 	(if (= a n) #t

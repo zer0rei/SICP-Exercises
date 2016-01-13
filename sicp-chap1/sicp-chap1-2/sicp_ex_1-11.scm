@@ -1,3 +1,4 @@
+; Exercise 1-11 in sicp
 (define (f n)
   (define (f-iter a b c n)
 	;; a=f(n-1) b=f(n-2) c=f(n-3)

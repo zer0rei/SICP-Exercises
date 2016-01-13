@@ -1,17 +1,12 @@
-(define (smallest-divisor n)
-  (define (devides? a b) (= (remainder b a) 0))
-  (define (next a) (if (= a 2) 3 (+ a 2)))
-  (define (find-divisor n test)
-	(cond ((> (* test test) n) n)
-		  ((devides? test n) test)
-		  (else (find-divisor n (next test)))))
-  (find-divisor n 2)
-)
+; Smallest divisor
+(include "smallest_divisor.scm")
 
+; Prime test using the smallest divisor procedure
 (define (prime? n)
   (if (< n 2) #f
   (= (smallest-divisor n) n)))
 
+; Timer for calculating a prime
 (define (prime-timer n)
   (define (report-prime elapsed-time)
 	(display " *** ")
@@ -23,6 +18,7 @@
   (display n)
   (start-prime-test n (current-inexact-milliseconds)))
 
+; Timer for searching first 3 primes bigger than n
 (define (search-primes n)
   (define (search-primes-count n count)
 	(if (even? n)
@@ -34,5 +30,4 @@
 		    (search-primes-count (+ n 2) (- count 1)))
 		  (search-primes-count (+ n 2) count))))))
   (search-primes-count n 3)
-  (newline)
-)
+  (newline))

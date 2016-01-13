@@ -1,3 +1,7 @@
+; Average procedure
+(define (average x y)
+  (/ (+ x y) 2))
+
 ; Newton Method for Square Root
 (define (sqrt2 x)
   (define (improve guess)
@@ -21,6 +25,3 @@
 	  guess
 	  (cbrt-iter (improve guess))))
   (cbrt-iter 1.0))
-
-(define (average x y)
-  (/ (+ x y) 2))
